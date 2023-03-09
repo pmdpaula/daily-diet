@@ -1,4 +1,4 @@
-# Rocketseat Ignite - ReactNative 2023 - Projeto 02
+# Rocketseat Ignite - ReactNative 2023 - Desafio do projeto 02
 
 App ***Daily Diet***
 
@@ -21,7 +21,7 @@ yarn add -D eslint prettier eslint-config-prettier eslint-plugin-react @typescri
 [Ciar alias para os imports, evitando passar caminhos complexos - babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver)
 [Ordenar as importações - eslint-plugin-import](https://github.com/import-js/eslint-plugin-import/)
 ```
-yarn add -D eslint-plugin-import @typescript-eslint/parser eslint-import-resolver-typescript eslint-import-resolver-babel-module
+yarn add -D eslint-plugin-import @typescript-eslint/parser eslint-import-resolver-typescript eslint-import-resolver-babel-module eslint-plugin-module-resolver
 ```
 ver configurações necessárias do `eslint-import-resolver-typescript` para funcionar correto com o path mapping
 ```
@@ -102,6 +102,31 @@ yarn add @react-navigation/native-stack
 [Manter a SplashScreen até leitura das fontes - expo-splash-screen](https://docs.expo.dev/versions/latest/sdk/splash-screen/)
 ```bash
 npx expo install expo-splash-screen
+```
+
+[Manipulação de data - date-fns](https://date-fns.org/docs/Getting-Started#installation)
+```bash
+yarn add date-fns
+```
+
+[Geração de hash para IDs - react-native-uuid](https://github.com/eugenehp/react-native-uuid)
+```bash
+yarn add react-native-uuid
+```
+
+[Armazenamento de dados no dispositivo - AsyncStorage](https://docs.expo.dev/versions/latest/sdk/async-storage/)
+```bash
+npx expo install @react-native-async-storage/async-storage
+```
+
+~[Seleção nos campos de data e hora - datetimepicker](https://github.com/react-native-datetimepicker/datetimepicker)~
+```bash
+expo install @react-native-community/datetimepicker
+```
+
+[Seleção nos campos de data e hora - React Native Date Picker](https://github.com/henninghall/react-native-date-picker)
+```bash
+yarn add react-native-date-picker
 ```
 
 ## Configurações do projeto

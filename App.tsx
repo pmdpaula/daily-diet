@@ -11,8 +11,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { View } from 'react-native';
 
-import { Home } from '@screens/Home';
-
+import { Routes } from './src/routes';
 import theme from './src/theme';
 
 // Keep the splash screen visible while we fetch resources
@@ -47,6 +46,7 @@ export default function App() {
       } finally {
         // Tell the application to render
         setAppIsReady(true);
+        // console.log('App is ready');
       }
     }
 
@@ -65,14 +65,21 @@ export default function App() {
   }, [appIsReady]);
 
   if (!appIsReady) {
+    // console.log('App is not ready');
+
     return null;
   }
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar style="dark" translucent />
-      <View onLayout={onLayoutRootView}>
-        <Home />
+      <StatusBar style="dark" backgroundColor="transparent" translucent />
+      <View
+        onLayout={onLayoutRootView}
+        style={{
+          flex: 1,
+        }}
+      >
+        <Routes />
       </View>
     </ThemeProvider>
   );

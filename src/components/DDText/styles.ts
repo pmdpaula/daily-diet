@@ -8,7 +8,7 @@ import { DDTextProps } from '.';
 export const Container = styled(Text)<DDTextProps>`
   /* width: 100%; */
 
-  ${({ theme, weight, size, align, color }) => css`
+  ${({ theme, weight = 'regular', size = 'md', align = 'left', color }) => css`
     height: ${theme.font_size[size] * 1.3}px;
     font-family: ${theme.font_family[weight]};
     font-size: ${theme.font_size[size]}px;

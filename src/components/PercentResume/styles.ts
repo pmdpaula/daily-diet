@@ -50,7 +50,7 @@ export const ResumeText = styled.Text`
 
 export const Icon = styled(ArrowUpRight).attrs<PercentResumeStyleProps>(
   ({ theme, isOnDiet }) => ({
-    color: isOnDiet ? theme.colors.primary.dark : theme.colors.secondary.dark,
+    // color: isOnDiet ? theme.colors.secondary.dark : theme.colors.primary.dark,
     size: theme.font_size.xl,
   }),
 )`

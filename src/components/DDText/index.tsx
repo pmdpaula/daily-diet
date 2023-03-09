@@ -1,14 +1,12 @@
-import { TextSize, TextWeight } from 'src/theme';
-
 import { TextProps } from 'react-native';
 
+import theme, { TextSize, TextWeight } from '../../theme';
 import { Container } from './styles';
 
 export type DDTextProps = TextProps & {
-  weight: TextWeight;
-  size: TextSize;
-  align: 'left' | 'center' | 'right';
-  // children: React.ReactNode;
+  weight?: TextWeight;
+  size?: TextSize;
+  align?: 'left' | 'center' | 'right';
   color?: string;
 };
 
@@ -16,7 +14,7 @@ export const DDText = ({
   weight,
   size,
   align,
-  color,
+  color = theme.colors.gray[200],
   children,
   ...rest
 }: DDTextProps) => {
