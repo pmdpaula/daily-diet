@@ -5,7 +5,6 @@ import DateTimePicker, {
 import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
 import { Control, Controller, FieldValues, useForm } from 'react-hook-form';
-// import DatePicker from 'react-native-date-picker';
 import uuid from 'react-native-uuid';
 import { useTheme } from 'styled-components/native';
 
@@ -48,12 +47,10 @@ type FormDataProps = {
 
 export const NewMeal = () => {
   const [isOnDietType, setIsOnDietType] = useState<IsOnDietTypeProps | null>();
-  const [formDate, setFormDate] = useState(
-    format(new Date(), 'yyyy-MM-dd HH:mm'),
-  );
-  // const [formTime, setFormTime] = useState(new Date());
-  const [datePickerMode, setDatePickerMode] = useState<'date' | 'time'>('date');
-  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [formDate, setFormDate] = useState(format(new Date(), 'dd/MM/yyyy'));
+  const [formTime, setFormTime] = useState(format(new Date(), 'HH:mm'));
+  // const [datePickerMode, setDatePickerMode] = useState<'date' | 'time'>('date');
+  // const [showDatePicker, setShowDatePicker] = useState(false);
 
   const { colors } = useTheme();
   const { navigate } = useNavigation();
@@ -68,24 +65,29 @@ export const NewMeal = () => {
     },
   });
 
-  // const control = control as unknown as Control<FieldValues, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const controlForm = control as unknown as Control<FieldValues, any>;
 
-  async function handleSubmitNewMeal(formData: FormDataProps) {
+  // function onChange(event: any, arg: any) {
+  //   return arg.nativeEvent.text;
+  // }
+
+  function submitNewMeal(formData: FormDataProps) {
     if (!isOnDietType) Alert.alert('Selecione se está dentro da dieta');
 
-    // Alert.alert('Refeição cadastrada com sucesso!');
+    Alert.alert('Refeição cadastrada com sucesso!');
 
     const newMeal = {
       id: uuid.v4(),
       name: formData.name,
       description: formData.description,
-      date: formDate.split(' ')[0],
-      time: formDate.split(' ')[1],
+      date: formDate,
+      time: formTime,
       isOnDiet: isOnDietType === 'on',
       // date: format(parse(formData.date + formData.time, 'dd/MM/yyyy HH:mm', new Date()), 'yyyy-MM-dd HH:mm'),
     };
 
-    await console.log(newMeal);
+    console.log(newMeal);
     navigate('meal_feedback', { isOnDiet: newMeal.isOnDiet });
   }
 
@@ -98,28 +100,28 @@ export const NewMeal = () => {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function onChangeDate(event: DateTimePickerEvent, selectedDate: any) {
-    const currentDate = selectedDate || formDate;
+  // function onChangeDate(event: DateTimePickerEvent, selectedDate: any) {
+  //   const currentDate = selectedDate || formDate;
 
-    setFormDate(currentDate);
-  }
+  //   setFormDate(currentDate);
+  // }
 
-  const handlerDatetimePicker = (currentMode: typeof datePickerMode) => {
-    if (Platform.OS === 'android') {
-      DateTimePickerAndroid.open({
-        value: new Date(formDate),
-        onChange: onChangeDate,
-        mode: currentMode,
-        is24Hour: true,
-      });
-      setShowDatePicker(false);
-      // for iOS, add a button that closes the picker
-    }
-    setDatePickerMode(currentMode);
-  };
+  // const handlerDatetimePicker = (currentMode: typeof datePickerMode) => {
+  //   if (Platform.OS === 'android') {
+  //     DateTimePickerAndroid.open({
+  //       value: new Date(formDate),
+  //       onChange: onChangeDate,
+  //       mode: currentMode,
+  //       is24Hour: true,
+  //     });
+  //     setShowDatePicker(false);
+  //     // for iOS, add a button that closes the picker
+  //   }
+  //   setDatePickerMode(currentMode);
+  // };
 
   useEffect(() => {
-    console.log('formDate', formDate);
+    console.log('formDateTime', formDate + ' ' + formTime);
   }, [formDate]);
 
   return (
@@ -137,7 +139,7 @@ export const NewMeal = () => {
         <Form>
           <Fields>
             <Controller
-              control={control}
+              control={controlForm}
               rules={{ required: true }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <DDInput
@@ -153,7 +155,7 @@ export const NewMeal = () => {
             />
 
             <Controller
-              control={control}
+              control={controlForm}
               name="description"
               defaultValue=""
               rules={{ required: true }}
@@ -169,68 +171,37 @@ export const NewMeal = () => {
 
             <ViewRow>
               <Controller
-                control={control}
+                control={controlForm}
                 name="date"
-                defaultValue={formDate.split(' ')[0]}
-                rules={{ required: true }}
-                render={({ field: { onChange, onBlur } }) => (
-                  // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                  //   <DDInput
-                  //     title="Data"
-                  //     value={format(formDate, 'dd.MM.yyyy')}
-                  //     // value={value}
-                  //     onChange={onChange}
-                  //     onBlur={onBlur}
-                  //     width={48}
-                  //     onFocus={() => showDatepicker('date')}
-                  //     showSoftInputOnFocus={false}
-                  //     onChangeText={onChange}
-                  //   />
-                  // </TouchableWithoutFeedback>
+                defaultValue={formDate}
+                // rules={{ required: true }}
+                render={({ field: { onChange } }) => (
                   <DDInput
                     title="Data"
-                    value={formDate.split(' ')[0]}
-                    // value={value}
-                    // onBlur={onBlur}
-                    // onChange={onChangeDate}
-                    // onChangeText={onChangeDate}
+                    value={formDate}
+                    // onChange={onChange}
                     width={48}
-                    onFocus={() => handlerDatetimePicker('date')}
-                    showSoftInputOnFocus={false}
+                    // onTouchStart={() => handlerDatetimePicker('date')}
+                    onChangeText={setFormDate}
                   />
                 )}
               />
-              {/* <DDInput
-                title="Data"
-                value={formDate.split(' ')[0]}
-                width={48}
-                onTouchStart={() => handlerDatetimePicker('date')}
-                showSoftInputOnFocus={false}
-              /> */}
 
-              {/* <Controller
-                control={control}
+              <Controller
+                control={controlForm}
                 name="time"
-                defaultValue={format(formDate, 'HH:mm')}
-                rules={{ required: true }}
-                render={({ field: { onChange, onBlur } }) => (
+                defaultValue={formTime}
+                // rules={{ required: true }}
+                render={({ field: { onChange } }) => (
                   <DDInput
                     title="Hora"
-                    value={format(formDate, 'HH:mm')}
+                    value={formTime}
                     width={48}
-                    onFocus={() => handlerDatetimePicker('time')}
-                    // onChangeText={onChange}
-                    showSoftInputOnFocus={false}
+                    onChange={(e) => onChange(e)}
+                    onChangeText={setFormTime}
+                    // onTouchStart={() => handlerDatetimePicker('time')}
                   />
                 )}
-              /> */}
-
-              <DDInput
-                title="Hora"
-                value={formDate.split(' ')[1]}
-                width={48}
-                onTouchStart={() => handlerDatetimePicker('time')}
-                showSoftInputOnFocus={false}
               />
             </ViewRow>
 
@@ -239,9 +210,9 @@ export const NewMeal = () => {
             </DDText>
             <ViewRow>
               <Controller
-                control={control}
+                control={controlForm}
                 name="isOnDiet"
-                rules={{ required: true }}
+                // rules={{ required: true }}
                 render={() => (
                   <OnDietCheckButton
                     title="Sim"
@@ -253,10 +224,10 @@ export const NewMeal = () => {
               />
 
               <Controller
-                control={control}
+                control={controlForm}
                 name="isOnDiet"
-                rules={{ required: true }}
-                render={() => (
+                // rules={{ required: true }}
+                render={(field) => (
                   <OnDietCheckButton
                     title="Não"
                     type="out"
@@ -269,28 +240,28 @@ export const NewMeal = () => {
           </Fields>
 
           <DarkButtton
-            onPress={handleSubmit(handleSubmitNewMeal)}
+            onPress={handleSubmit(submitNewMeal)}
             title="Salvar"
             disabled={formState.isSubmitting}
           />
           {/* {showDatePicker && (
-            // <Controller
-            //   control={control}
-            //   name="date"
-            //   defaultValue={formDate.split(' ')[0]}
-            //   rules={{ required: true }}
-            //   render={({ field: { onChange, onBlur, value } }) => (
+            <Controller
+              control={control}
+              name="date"
+              defaultValue={formDate.split(' ')[0]}
+              rules={{ required: true }}
+              render={({ field: { onChange, onBlur, value } }) => (
             <DateTimePicker
               testID="dateTimePicker"
-              value={new Date(formDate, 'dd.MM.yyyy HH:mm')}
+              value={new Date(formDate)}
               mode={datePickerMode}
               is24Hour
               display="calendar"
               // onChange={onChange}
               negativeButton={{ label: 'Cancel' }}
             />
-            //   )}
-            // />
+              )}
+            />
           )} */}
         </Form>
       </Content>
