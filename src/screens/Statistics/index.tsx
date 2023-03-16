@@ -10,6 +10,9 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { TouchableOpacity } from 'react-native';
 
+import { MealStorageDTO } from '@storage/meal/MealStorageDTO';
+import { mealsGetAll } from '@storage/meal/mealsGetAll';
+
 import { DDText } from '@components/DDText';
 import { InfoSquare } from '@components/InfoSquare';
 

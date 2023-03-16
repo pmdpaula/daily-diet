@@ -6,11 +6,10 @@ type SignalTypeProps = {
 
 export const Container = styled.View`
   width: 100%;
-  height: 49px;
+  height: 50px;
 
-  /* flex: 1; */
   flex-direction: row;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 
   padding: 12px 14px;
@@ -23,19 +22,15 @@ export const Container = styled.View`
 export const Content = styled.View`
   flex: 1;
   flex-direction: row;
-  /* justify-content: flex-start;
-  align-items: center; */
 `;
 
 export const Separator = styled.View`
   width: 1px;
-  height: 100%;
+  height: 20px;
   background-color: ${({ theme }) => theme.colors.gray[400]};
 
   margin: 0 12px;
 `;
-
-// const Food = styled.div``;
 
 export const Signal = styled.View<SignalTypeProps>`
   width: 14px;

@@ -8,6 +8,6 @@ type ContainerStylesProps = {
 export const Container = styled(SafeAreaView)<ContainerStylesProps>`
   width: 100%;
 
-  /* flex: 1; */
+  flex: 1;
   background-color: ${({ bgColor }) => bgColor};
 `;

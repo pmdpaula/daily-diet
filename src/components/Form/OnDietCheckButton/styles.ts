@@ -3,11 +3,11 @@ import styled from 'styled-components/native';
 
 import { TouchableOpacity } from 'react-native';
 
-import { IsOnDietTypeProps } from '.';
+import { OnDietTypeProps } from '.';
 
 type ContainerStylesProps = {
   isActive?: boolean;
-  type: IsOnDietTypeProps;
+  type: OnDietTypeProps;
 };
 
 export const Container = styled(TouchableOpacity)<ContainerStylesProps>`

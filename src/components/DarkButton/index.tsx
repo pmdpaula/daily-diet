@@ -7,18 +7,18 @@ import { DDText } from '@components/DDText';
 
 import { Container } from './styles';
 
-type DarkButttonProps = TouchableOpacityProps & {
+type DarkButtonProps = TouchableOpacityProps & {
   title: string;
   showPlusIcon?: boolean;
   onPress: () => void;
 };
 
-export const DarkButtton = ({
+export const DarkButton = ({
   title,
   showPlusIcon = false,
   onPress,
   ...rest
-}: DarkButttonProps) => {
+}: DarkButtonProps) => {
   const theme = useTheme();
 
   return (

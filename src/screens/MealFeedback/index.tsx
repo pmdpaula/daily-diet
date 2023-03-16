@@ -3,9 +3,10 @@ import { useTheme } from 'styled-components/native';
 
 import { Image, Text, View } from 'react-native';
 
+import { DDButtton } from '@components/DDButtton';
 import { DDText } from '@components/DDText';
-import { DarkButtton } from '@components/DarkButtton';
 
+// import { DarkButton } from '@components/DarkButton';
 import OnDietImg from '@assets/onDietImage.png';
 import OutDietImg from '@assets/outDietImage.png';
 
@@ -75,9 +76,9 @@ export const MealFeedback = () => {
 
       <Image source={image} style={{ marginVertical: 36 }} />
 
-      <DarkButtton
+      <DDButtton
         title="Ir para a página inicial"
-        showPlusIcon={false}
+        // iconType=''
         onPress={handleBackToHome}
         style={{ width: 190 }}
       />

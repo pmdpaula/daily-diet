@@ -4,12 +4,12 @@ import { DDText } from '@components/DDText';
 
 import { Circle, Container } from './styles';
 
-export type IsOnDietTypeProps = 'on' | 'out';
+export type OnDietTypeProps = 'on' | 'out';
 
 type OnDietCheckButtonProps = TouchableOpacityProps & {
   title: string;
   isActive: boolean;
-  type: IsOnDietTypeProps;
+  type: OnDietTypeProps;
 };
 
 export const OnDietCheckButton = ({

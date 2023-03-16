@@ -1,9 +1,13 @@
 import styled, { css } from 'styled-components/native';
 
-import { TextInput, TextInputProps } from 'react-native';
+import { TextInput } from 'react-native';
 
 type ContainerStylesProps = {
   width: number;
+};
+
+type InputStylesProps = {
+  readOnly: boolean;
 };
 
 export const Container = styled.View<ContainerStylesProps>`
@@ -11,9 +15,13 @@ export const Container = styled.View<ContainerStylesProps>`
   padding: 12px 0;
 `;
 
-export const Input = styled(TextInput).attrs<TextInputProps>(({ theme }) => ({
-  placeholderTextColor: theme.colors.gray[500],
-}))`
+export const Input = styled(TextInput).attrs<InputStylesProps>(
+  ({ theme, readOnly }) => ({
+    placeholderTextColor: theme.colors.gray[500],
+    // editable: !readOnly,
+    backgroundColor: readOnly ? theme.colors.gray[500] : theme.colors.gray[700],
+  }),
+)<InputStylesProps>`
   /* width: 100%; */
 
   min-height: 48px;
@@ -23,7 +31,6 @@ export const Input = styled(TextInput).attrs<TextInputProps>(({ theme }) => ({
     font-family: ${theme.font_family.regular};
     font-size: ${theme.font_size.md}px;
 
-    /* background-color: ${theme.colors.gray[500]}; */
     color: ${theme.colors.gray[100]};
   `}
 

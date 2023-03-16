@@ -1,6 +1,6 @@
 import { useTheme } from 'styled-components/native';
 
-import { TextInput, TextInputProps } from 'react-native';
+import { TextInputProps } from 'react-native';
 
 import { DDText } from '@components/DDText';
 
@@ -10,6 +10,7 @@ type DDInputProps = TextInputProps & {
   title: string;
   placeholder?: string;
   width?: number;
+  readOnly?: boolean;
   // inputRef?: React.RefObject<TextInput>;
 };
 
@@ -17,6 +18,7 @@ export const DDInput = ({
   title,
   placeholder = '',
   width = 100,
+  readOnly = false,
   // inputRef,
   ...rest
 }: DDInputProps) => {
@@ -27,7 +29,12 @@ export const DDInput = ({
       <DDText size="sm" color={colors.gray[200]} weight="bold">
         {title}
       </DDText>
-      <Input placeholder={placeholder} {...rest} />
+      <Input
+        placeholder={placeholder}
+        placeholderTextColor={colors.gray[500]}
+        readOnly={readOnly}
+        {...rest}
+      />
     </Container>
   );
 };

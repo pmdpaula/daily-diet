@@ -10,13 +10,14 @@ export const Container = styled.View`
   padding-top: 42px;
 `;
 
-export const Content = styled.View`
-  width: 100%;
-  margin-top: 28px;
-`;
+// export const Content = styled.View`
+//   width: 100%;
+//   margin-top: 28px;
+// `;
 
 export const DietListWrapper = styled.View`
   width: 100%;
-
+  /* height: 40%; */
+  flex: 1;
   margin-top: 24px;
 `;

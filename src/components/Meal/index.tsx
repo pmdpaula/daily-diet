@@ -1,16 +1,20 @@
 import { useTheme } from 'styled-components/native';
 
+import { MealStorageDTO } from '@storage/meal/MealStorageDTO';
+
 import { DDText } from '@components/DDText';
 
 import { Container, Content, Separator, Signal } from './styles';
 
 type MealProps = {
-  isOnDiet: boolean;
-  name: string;
-  time: string;
+  // isOnDiet: boolean;
+  // name: string;
+  // time: string;
+  data: MealStorageDTO;
 };
 
-export const Meal = ({ isOnDiet, name, time }: MealProps) => {
+// export const Meal = ({ isOnDiet, name, time }: MealProps) => {
+export const Meal = ({ data }: MealProps) => {
   const theme = useTheme();
 
   return (
@@ -23,16 +27,16 @@ export const Meal = ({ isOnDiet, name, time }: MealProps) => {
           color={theme.colors.gray[100]}
           // color="#1B1D1E"
         >
-          {time}
+          {data.time}
         </DDText>
 
         <Separator />
 
         <DDText align="left" size="xs" weight="regular">
-          {name}
+          {data.name}
         </DDText>
       </Content>
-      <Signal isOnDiet={isOnDiet} />
+      <Signal isOnDiet={data.isOnDiet} />
     </Container>
   );
 };
